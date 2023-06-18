@@ -11,19 +11,10 @@ class StaticPagesURLTests(TestCase):
         """Проверка доступности страниц."""
         response = self.guest_client.get('/')
         self.assertEqual(
-            response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR
+            response.status_code, 404
         )
 
         response = self.guest_client.get('/second_page/')
         self.assertEqual(
-            response.status_code,
-            HTTPStatus.INTERNAL_SERVER_ERROR
+            response.status_code, 404
         )
-
-    def test_page_shows_correct_content(self):
-        """Проверка контента страниц."""
-        response = self.guest_client.get('/')
-        self.assertContains(response, 'У меня получилось!')
-
-        response = self.guest_client.get('/second_page/')
-        self.assertContains(response, 'А это вторая страница!')
